@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e107Plugin name="Survey" lan="LAN_PLUGIN_SURVEY_NAME" version="1.0.0" date="2026-11-16" compatibility="2.0" installRequired="true">
+	<description>This plugin is designed to allow the site admin to configure surveys for your site.</description>
+	<author name="McFly - Alex-e107nl" email="info@e107.nl" url="https://e107.nl" />
+	<category>content</category>
+	<adminLinks>
+		<link url="admin_config.php" description="Survey List" icon="images/survey_icon.png" iconSmall="images/survey_icon_16.png" primary="true">
+			Survey List
+		</link>
+	</adminLinks>
+	<comments>
+		<comment name="survey" />
+	</comments>
+</e107Plugin>
