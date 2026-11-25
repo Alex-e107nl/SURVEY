@@ -139,4 +139,6 @@ return array(
 	'ADLAN_SUR214' => 'HTML Content',
 	'ADLAN_SUR215' => 'Please save the survey settings first. The field builder will be available after saving.',
 	'ADLAN_SUR216' => 'Results',
+	'ADLAN_SUR217' => 'New field',
+	'ADLAN_SUR218' => 'e.g. 30,100 or opt1,opt2',
 );

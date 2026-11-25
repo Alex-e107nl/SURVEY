@@ -140,4 +140,6 @@ return array(
 	'ADLAN_SURM1' => 'Undersøkelsesmeny',
 	'ADLAN_SURM2' => 'Velg undersøkelse',
 	'ADLAN_SURM3' => 'Overskrift (valgfritt)',
+	'ADLAN_SUR217' => 'Nytt felt',
+	'ADLAN_SUR218' => 'f.eks. 30,100 eller opt1,opt2',
 );

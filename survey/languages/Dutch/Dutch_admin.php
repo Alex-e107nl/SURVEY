@@ -140,4 +140,6 @@ return array(
 'ADLAN_SUR216' => 'Resultaten',
 	'ADLAN_SURM2' => 'Selecteer formulier',
 	'ADLAN_SURM3' => 'Bijschrift (optioneel)',
+	'ADLAN_SUR217' => 'Nieuw veld',
+	'ADLAN_SUR218' => 'bijv. 30,100 of opt1,opt2',
 );

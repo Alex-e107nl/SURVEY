@@ -804,7 +804,7 @@ if(!empty($_POST['create']) || !empty($_POST['edit'])){
 				$text .= $typeOptions;
 				$text .= "</select>";
 				$text .= "</div>";
-				$text .= "<div class='col-6 col-md-2 text-center'>";
+				$text .= "<div class='col-6 col-md-2 text-center d-flex align-items-end'>";
 				$text .= "<div class='form-check'>";
 				$text .= "<input class='form-check-input field-hidden-input' type='checkbox' name='field_hidden[{$idx}]' value='1'".(!empty($f['field_hidden']) ? ' checked' : '')." />";
 				$text .= "<label class='form-check-label small'>".ADLAN_SUR114."</label>";
@@ -829,13 +829,13 @@ if(!empty($_POST['create']) || !empty($_POST['edit'])){
 				$text .= $colOptions;
 				$text .= "</select>";
 				$text .= "</div>";
-				$text .= "<div class='col-4 col-md-1 text-center'>";
+				$text .= "<div class='col-4 col-md-1 text-center d-flex align-items-end'>";
 				$text .= "<div class='form-check'>";
 				$text .= "<input class='form-check-input field-req-input' type='checkbox' name='field_req[{$idx}]' value='1'".(!empty($f['field_req']) ? ' checked' : '')." />";
 				$text .= "<label class='form-check-label small'>".ADLAN_SUR113."</label>";
 				$text .= "</div>";
 				$text .= "</div>";
-				$text .= "<div class='col-4 col-md-1 text-center'>";
+				$text .= "<div class='col-4 col-md-1 text-center d-flex align-items-end'>";
 				$text .= "<div class='form-check'>";
 				$text .= "<input class='form-check-input field-hidden-input' type='checkbox' name='field_hidden[{$idx}]' value='1'".(!empty($f['field_hidden']) ? ' checked' : '')." />";
 				$text .= "<label class='form-check-label small'>".ADLAN_SUR114."</label>";
@@ -843,7 +843,7 @@ if(!empty($_POST['create']) || !empty($_POST['edit'])){
 				$text .= "</div>";
 				$text .= "<div class='col-12 col-md-4'>";
 				$text .= "<label class='form-label small mb-1'>".ADLAN_SUR115."</label>";
-				$text .= "<input type='text' class='form-control form-control-sm field-choices-input' name='field_choices[{$idx}]' value='".htmlspecialchars($f['field_choices'] ?? '')."' placeholder='e.g. 30,100 or opt1,opt2,opt3' />";
+				$text .= "<input type='text' class='form-control form-control-sm field-choices-input' name='field_choices[{$idx}]' value='".htmlspecialchars($f['field_choices'] ?? '')."' placeholder='".defset('ADLAN_SUR218')."' />";
 				$text .= "</div>";
 			}
 
@@ -889,6 +889,26 @@ foreach($fieldtypes as $ftnum => $ftval){
 }
 $text .= "</select>";
 
+// Translated strings for the JS field builder (survey_admin.js builds new
+// field cards on the client side - it can't use PHP constants directly).
+$survey_admin_lan = array(
+	'label'        => ADLAN_SUR111,
+	'type'         => ADLAN_SUR112,
+	'width'        => ADLAN_SUR103,
+	'w_full'       => ADLAN_SUR104,
+	'w_half'       => ADLAN_SUR105,
+	'w_third'      => ADLAN_SUR106,
+	'w_quarter'    => ADLAN_SUR107,
+	'required'     => ADLAN_SUR113,
+	'hidden'       => ADLAN_SUR114,
+	'params'       => ADLAN_SUR115,
+	'html_content' => ADLAN_SUR214,
+	'new_field'    => defset('ADLAN_SUR217'),
+	'params_ph'    => defset('ADLAN_SUR218'),
+	'drag'         => ADLAN_SUR110,
+	'delete'       => ADLAN_SUR117,
+);
+$text .= "<script>var SURVEY_ADMIN_LAN = " . json_encode($survey_admin_lan, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) . ";</script>";
 $text .= "<script>";
 $text .= file_get_contents(__DIR__.'/survey_admin.js');
 $text .= "</script>";

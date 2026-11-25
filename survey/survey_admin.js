@@ -11,6 +11,27 @@
 (function () {
 	'use strict';
 
+	/* ---- Translated strings (injected by admin_config.php as SURVEY_ADMIN_LAN)
+	   English fallbacks keep the builder working if the map is missing. ---- */
+	var L = window.SURVEY_ADMIN_LAN || {};
+	function T(key, fallback) {
+		var v = L[key];
+		return (v === undefined || v === null || v === '') ? fallback : v;
+	}
+
+	/* Field type name from the hidden template select (options are rendered
+	   by PHP from the translated ADLAN_SURTYPE_* constants). */
+	function typeLabel(type) {
+		var ts = document.getElementById('survey-type-template');
+		if (ts) {
+			var opts = ts.querySelectorAll('option');
+			for (var i = 0; i < opts.length; i++) {
+				if (opts[i].value == type) return opts[i].textContent;
+			}
+		}
+		return '';
+	}
+
 	var list = document.getElementById('survey-field-list');
 	if (!list) return;
 
@@ -183,11 +204,11 @@
 			bodyHtml =
 				'<div class="row g-2">'
 				+ '<div class="col-12">'
-				+ '<label class="form-label small mb-1">HTML Content</label>'
+				+ '<label class="form-label small mb-1">' + T('html_content', 'HTML Content') + '</label>'
 				+ '<textarea class="form-control form-control-sm field-text-input" name="field_text[' + idx + ']" rows="8" spellcheck="false" style="font-family:monospace;"></textarea>'
 				+ '</div>'
 				+ '<div class="col-6 col-md-4">'
-				+ '<label class="form-label small mb-1">Type</label>'
+				+ '<label class="form-label small mb-1">' + T('type', 'Type') + '</label>'
 				+ '<select class="form-select form-select-sm field-type-input" name="field_type[' + idx + ']">'
 				+ typeOptions
 				+ '</select>'
@@ -195,30 +216,30 @@
 				+ '<div class="col-6 col-md-2 text-center">'
 				+ '<div class="form-check">'
 				+ '<input class="form-check-input field-hidden-input" type="checkbox" name="field_hidden[' + idx + ']" value="1" />'
-				+ '<label class="form-check-label small">Hid</label>'
+				+ '<label class="form-check-label small">' + T('hidden', 'Hid') + '</label>'
 				+ '</div>'
 				+ '</div>'
 				+ '</div>';
 		} else {
-			var colOptions = '<option value="12"' + (col == 12 ? ' selected' : '') + '>Full</option>'
-				+ '<option value="6"' + (col == 6 ? ' selected' : '') + '>Half</option>'
-				+ '<option value="4"' + (col == 4 ? ' selected' : '') + '>Third</option>'
-				+ '<option value="3"' + (col == 3 ? ' selected' : '') + '>Quarter</option>';
+			var colOptions = '<option value="12"' + (col == 12 ? ' selected' : '') + '>' + T('w_full', 'Full') + '</option>'
+				+ '<option value="6"' + (col == 6 ? ' selected' : '') + '>' + T('w_half', 'Half') + '</option>'
+				+ '<option value="4"' + (col == 4 ? ' selected' : '') + '>' + T('w_third', 'Third') + '</option>'
+				+ '<option value="3"' + (col == 3 ? ' selected' : '') + '>' + T('w_quarter', 'Quarter') + '</option>';
 
 			bodyHtml =
 				'<div class="row g-2">'
 				+ '<div class="col-12 col-md-5">'
-				+ '<label class="form-label small mb-1">Label</label>'
+				+ '<label class="form-label small mb-1">' + T('label', 'Label') + '</label>'
 				+ '<input type="text" class="form-control form-control-sm field-text-input" name="field_text[' + idx + ']" value="' + (label || '') + '" />'
 				+ '</div>'
 				+ '<div class="col-6 col-md-3">'
-				+ '<label class="form-label small mb-1">Type</label>'
+				+ '<label class="form-label small mb-1">' + T('type', 'Type') + '</label>'
 				+ '<select class="form-select form-select-sm field-type-input" name="field_type[' + idx + ']">'
 				+ typeOptions
 				+ '</select>'
 				+ '</div>'
 				+ '<div class="col-6 col-md-2">'
-				+ '<label class="form-label small mb-1">Width</label>'
+				+ '<label class="form-label small mb-1">' + T('width', 'Width') + '</label>'
 				+ '<select class="form-select form-select-sm field-col-input" name="field_col[' + idx + ']">'
 				+ colOptions
 				+ '</select>'
@@ -226,33 +247,33 @@
 				+ '<div class="col-4 col-md-1 text-center d-flex align-items-end">'
 				+ '<div class="form-check">'
 				+ '<input class="form-check-input field-req-input" type="checkbox" name="field_req[' + idx + ']" value="1" />'
-				+ '<label class="form-check-label small">Req</label>'
+				+ '<label class="form-check-label small">' + T('required', 'Req') + '</label>'
 				+ '</div>'
 				+ '</div>'
 				+ '<div class="col-4 col-md-1 text-center d-flex align-items-end">'
 				+ '<div class="form-check">'
 				+ '<input class="form-check-input field-hidden-input" type="checkbox" name="field_hidden[' + idx + ']" value="1" />'
-				+ '<label class="form-check-label small">Hid</label>'
+				+ '<label class="form-check-label small">' + T('hidden', 'Hid') + '</label>'
 				+ '</div>'
 				+ '</div>'
 				+ '<div class="col-12 col-md-4">'
-				+ '<label class="form-label small mb-1">Parameters</label>'
-				+ '<input type="text" class="form-control form-control-sm field-choices-input" name="field_choices[' + idx + ']" value="" placeholder="e.g. 30,100 or opt1,opt2" />'
+				+ '<label class="form-label small mb-1">' + T('params', 'Parameters') + '</label>'
+				+ '<input type="text" class="form-control form-control-sm field-choices-input" name="field_choices[' + idx + ']" value="" placeholder="' + T('params_ph', 'e.g. 30,100 or opt1,opt2,opt3') + '" />'
 				+ '</div>'
 				+ '</div>';
 		}
 
 		var headerPreview = isHtmlBlock
-			? '<span class="badge field-type-badge"><span class="field-icon">' + ICON_CODE + '</span> HTML Block</span>'
-			: '<span class="field-label-preview">' + (label || 'New field') + '</span>';
+			? '<span class="badge field-type-badge"><span class="field-icon">' + ICON_CODE + '</span> ' + (typeLabel('22') || 'HTML Block') + '</span>'
+			: '<span class="field-label-preview">' + (label || T('new_field', 'New field')) + '</span>';
 
 		card.innerHTML =
 			'<div class="card-header">'
-			+ '<span class="drag-handle" title="Drag to reorder">' + ICON_GRIP + '</span>'
+			+ '<span class="drag-handle" title="' + T('drag', 'Drag to reorder') + '">' + ICON_GRIP + '</span>'
 			+ '<span class="field-num">' + (idx + 1) + '</span>'
 			+ headerPreview
 			+ '<div class="field-actions">'
-			+ '<button type="button" class="btn btn-sm btn-outline-danger btn-delete-field" title="Delete">' + ICON_X + '</button>'
+			+ '<button type="button" class="btn btn-sm btn-outline-danger btn-delete-field" title="' + T('delete', 'Delete') + '">' + ICON_X + '</button>'
 			+ '</div>'
 			+ '</div>'
 			+ '<div class="card-body">'
@@ -269,7 +290,7 @@
 		if (labelInput) {
 			labelInput.addEventListener('input', function () {
 				var preview = card.querySelector('.field-label-preview');
-				if (preview) preview.textContent = labelInput.value || 'New field';
+				if (preview) preview.textContent = labelInput.value || T('new_field', 'New field');
 			});
 		}
 
@@ -290,17 +311,8 @@
 			var btn = e.target.closest('.btn[data-field-type]');
 			if (!btn) return;
 			var type = btn.dataset.fieldType;
-			var labels = {
-				'1': 'Text field', '2': 'Text area', '3': 'Checkboxes',
-				'4': 'Radio buttons', '5': 'Dropdown', '6': 'Separator',
-				'7': 'Date picker', '8': 'Name', '9': 'Calculation',
-				'10': 'Email', '11': 'Number', '12': 'Email-to',
-				'13': 'Row break', '14': 'Signature', '15': 'File upload',
-				'16': 'Phone', '17': 'URL', '18': 'Color picker',
-				'19': 'Range slider', '20': 'Time picker', '21': 'Country',
-				'22': 'HTML block', '23': 'Password'
-			};
-			addFieldCard(type, labels[type] || 'New field', 12);
+			// Type name comes from the PHP-rendered (translated) template select.
+			addFieldCard(type, typeLabel(type) || T('new_field', 'New field'), 12);
 		});
 	}
 

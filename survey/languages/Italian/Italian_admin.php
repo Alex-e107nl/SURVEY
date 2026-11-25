@@ -140,4 +140,6 @@ return array(
 	'ADLAN_SURM1' => 'Menu sondaggio',
 	'ADLAN_SURM2' => 'Seleziona sondaggio',
 	'ADLAN_SURM3' => 'Didascalia (facoltativo)',
+	'ADLAN_SUR217' => 'Nuovo campo',
+	'ADLAN_SUR218' => 'es. 30,100 o opt1,opt2',
 );
