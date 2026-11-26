@@ -175,7 +175,7 @@ function show_survey($snum)
 		}
 		if(!empty($row))
 		{
-			$ns->tablerender($row['survey_name'], $ret);
+			$ns->tablerender($row['survey_name'], survey_bs3_wrap($ret));
 		}
 	}
 }
@@ -546,7 +546,7 @@ if(!empty($_POST['submit']))
 		$text .= "</div>";
 	}
 
-	$ns->tablerender(LAN_SUR9, "<div class='alert alert-success'>".$text."</div>");
+	$ns->tablerender(LAN_SUR9, survey_bs3_wrap("<div class='alert alert-success'>".$text."</div>"));
 	require_once(FOOTERF);
 	exit;
 }

@@ -607,7 +607,7 @@ if(SURVEY_PRINT === TRUE)
 		$table_title .= " - ".LAN_SUR38.": ".($selected_rec+1);
 	}
 }
-$ns -> tablerender($table_title, $text);
+$ns -> tablerender($table_title, survey_bs3_wrap($text));
 
 if(!$_POST['list'] && SURVEY_PRINT !== TRUE)
 {

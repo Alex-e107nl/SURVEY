@@ -1,0 +1,320 @@
+/* ============================================================
+   Survey plugin — Bootstrap 5 compatibility layer
+   --------------------------------------------------------
+   The survey plugin UI (admin builder + front-end pages) is
+   built with Bootstrap 5.3 markup. When the page is rendered
+   by e107's classic Bootstrap 3 theme (the standard "bootstrap3"
+   admin theme or the bootstrap3 site theme), most of the BS5
+   utility/component classes do not exist.
+
+   This file emulates exactly the BS5 classes the plugin uses,
+   scoped under the .survey-bs3 wrapper (added by the plugin
+   only when a BS3 theme is active), so it never leaks into the
+   rest of the site — and never runs at all under BS5-based
+   admin themes (e.g. the tabler/etabler admin theme).
+
+   Colours use translucent grey overlays + currentColor so the
+   same rules look native on the dark admin theme (#2f2f2f)
+   and on the light front-end theme alike.
+   ============================================================ */
+
+/* Bootstrap 5 CSS custom properties used by survey_admin.css
+   (drag handle + field type badge) — mapped to e107's primary. */
+.survey-bs3 {
+	--bs-primary: #337ab7;
+	--bs-primary-bg-subtle: rgba(51, 122, 183, 0.15);
+}
+
+/* ---- Cards (emulates BS3 .panel) ---- */
+.survey-bs3 .card {
+	position: relative;
+	background-color: transparent;
+	border: 1px solid rgba(128, 128, 128, 0.40);
+	border-radius: 4px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.survey-bs3 .card-header {
+	padding: 10px 15px;
+	background-color: rgba(128, 128, 128, 0.18);
+	border-bottom: 1px solid rgba(128, 128, 128, 0.40);
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.survey-bs3 .card-body {
+	padding: 15px;
+}
+
+/* Builder field cards — override the light background from
+   survey_admin.css (loaded later in the page, but lower
+   specificity than these rules). */
+.survey-bs3 .survey-field-card .card-header {
+	background-color: rgba(128, 128, 128, 0.18);
+}
+.survey-bs3 .survey-field-card.drop-target {
+	border-top-color: #337ab7;
+}
+.survey-bs3 .survey-field-card.drop-above {
+	box-shadow: 0 -3px 0 0 #337ab7;
+}
+.survey-bs3 .survey-field-card.drop-below {
+	box-shadow: 0 3px 0 0 #337ab7;
+}
+
+/* ---- Outline buttons (BS3 has no btn-outline-*) ---- */
+.survey-bs3 .btn-outline-primary {
+	color: #337ab7;
+	background-color: transparent;
+	border-color: #337ab7;
+}
+.survey-bs3 .btn-outline-primary:hover,
+.survey-bs3 .btn-outline-primary:focus,
+.survey-bs3 .btn-outline-primary:active,
+.survey-bs3 .btn-outline-primary.active {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #2d6da3;
+}
+.survey-bs3 .btn-outline-secondary {
+	color: #888;
+	background-color: transparent;
+	border-color: #888;
+}
+.survey-bs3 .btn-outline-secondary:hover,
+.survey-bs3 .btn-outline-secondary:focus,
+.survey-bs3 .btn-outline-secondary:active,
+.survey-bs3 .btn-outline-secondary.active {
+	color: #fff;
+	background-color: #888;
+	border-color: #777;
+}
+.survey-bs3 .btn-outline-success {
+	color: #5cb85c;
+	background-color: transparent;
+	border-color: #5cb85c;
+}
+.survey-bs3 .btn-outline-success:hover,
+.survey-bs3 .btn-outline-success:focus,
+.survey-bs3 .btn-outline-success:active,
+.survey-bs3 .btn-outline-success.active {
+	color: #fff;
+	background-color: #5cb85c;
+	border-color: #4cae4c;
+}
+.survey-bs3 .btn-outline-info {
+	color: #5bc0de;
+	background-color: transparent;
+	border-color: #5bc0de;
+}
+.survey-bs3 .btn-outline-info:hover,
+.survey-bs3 .btn-outline-info:focus,
+.survey-bs3 .btn-outline-info:active,
+.survey-bs3 .btn-outline-info.active {
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+}
+.survey-bs3 .btn-outline-danger {
+	color: #d9534f;
+	background-color: transparent;
+	border-color: #d9534f;
+}
+.survey-bs3 .btn-outline-danger:hover,
+.survey-bs3 .btn-outline-danger:focus,
+.survey-bs3 .btn-outline-danger:active,
+.survey-bs3 .btn-outline-danger.active {
+	color: #fff;
+	background-color: #d9534f;
+	border-color: #d43f3a;
+}
+
+/* ---- Forms (BS3: no form-select / form-control-sm /
+   form-check-input / form-check-label / form-label /
+   form-text / form-range / form-control-color) ---- */
+.survey-bs3 .form-select {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	padding: 6px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border: 1px solid rgba(128, 128, 128, 0.50);
+	border-radius: 4px;
+}
+.survey-bs3 .form-select-sm {
+	height: 30px;
+	padding: 5px 10px;
+	font-size: 12px;
+}
+.survey-bs3 .form-control-sm {
+	height: 30px;
+	padding: 5px 10px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+.survey-bs3 .form-label {
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.survey-bs3 .form-text {
+	display: block;
+	margin-top: 5px;
+	font-size: 12px;
+	opacity: 0.8;
+}
+.survey-bs3 .form-check {
+	min-height: 18px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+.survey-bs3 .form-check-input {
+	position: relative;
+	top: 4px;
+	margin: 0 5px 0 0;
+	vertical-align: middle;
+}
+.survey-bs3 .form-check-label {
+	margin-bottom: 0;
+	vertical-align: middle;
+	font-weight: normal;
+}
+.survey-bs3 .form-range {
+	width: 100%;
+}
+.survey-bs3 .form-control-color {
+	padding: 2px;
+}
+
+/* ---- Display utilities ---- */
+.survey-bs3 .d-flex {
+	display: flex;
+}
+.survey-bs3 .d-inline-flex {
+	display: inline-flex;
+}
+.survey-bs3 .d-inline {
+	display: inline-block;
+}
+.survey-bs3 .d-none {
+	display: none !important;
+}
+.survey-bs3 .d-grid {
+	display: block;
+}
+.survey-bs3 .d-grid > .btn {
+	display: block;
+	width: 100%;
+}
+
+/* ---- Flex helpers ---- */
+.survey-bs3 .flex-wrap {
+	flex-wrap: wrap;
+}
+.survey-bs3 .align-items-center {
+	align-items: center;
+}
+.survey-bs3 .align-items-end {
+	align-items: flex-end;
+}
+.survey-bs3 .justify-content-between {
+	justify-content: space-between;
+}
+.survey-bs3 .gap-1 {
+	gap: 4px;
+}
+.survey-bs3 .gap-2 {
+	gap: 8px;
+}
+.survey-bs3 .gap-3 {
+	gap: 16px;
+}
+
+/* ---- Spacing (BS3 has no margin/padding scale) ---- */
+.survey-bs3 .mb-0 { margin-bottom: 0 !important; }
+.survey-bs3 .mb-1 { margin-bottom: 4px !important; }
+.survey-bs3 .mb-2 { margin-bottom: 8px !important; }
+.survey-bs3 .mb-3 { margin-bottom: 16px !important; }
+.survey-bs3 .mb-4 { margin-bottom: 24px !important; }
+.survey-bs3 .mt-1 { margin-top: 4px !important; }
+.survey-bs3 .mt-2 { margin-top: 8px !important; }
+.survey-bs3 .mt-3 { margin-top: 16px !important; }
+.survey-bs3 .mt-4 { margin-top: 24px !important; }
+.survey-bs3 .my-3 { margin-top: 16px !important; margin-bottom: 16px !important; }
+.survey-bs3 .me-1 { margin-right: 4px !important; }
+.survey-bs3 .me-2 { margin-right: 8px !important; }
+.survey-bs3 .ms-2 { margin-left: 8px !important; }
+.survey-bs3 .p-2  { padding: 8px !important; }
+.survey-bs3 .pt-2 { padding-top: 8px !important; }
+.survey-bs3 .pb-2 { padding-bottom: 8px !important; }
+.survey-bs3 .py-3 { padding-top: 16px !important; padding-bottom: 16px !important; }
+.survey-bs3 .py-4 { padding-top: 24px !important; padding-bottom: 24px !important; }
+
+/* ---- Grid: breakpoint-less col-* (BS5 only; BS3 needs col-xs-*)
+   On md+ the paired col-md-* controls the width (the :not() keeps
+   this shim out of the way). */
+@media (max-width: 991px) {
+	.survey-bs3 .row > .col-12 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 15px;
+		padding-right: 15px;
+		float: left;
+		width: 100%;
+	}
+	.survey-bs3 .row > .col-6 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 15px;
+		padding-right: 15px;
+		float: left;
+		width: 50%;
+	}
+	.survey-bs3 .row > .col-4 {
+		position: relative;
+		min-height: 1px;
+		padding-left: 15px;
+		padding-right: 15px;
+		float: left;
+		width: 33.33333333%;
+	}
+}
+@media (min-width: 992px) {
+	.survey-bs3 .row > .col-12:not([class*="col-md-"]) { width: 100%; }
+	.survey-bs3 .row > .col-6:not([class*="col-md-"])  { width: 50%; }
+	.survey-bs3 .row > .col-4:not([class*="col-md-"])  { width: 33.33333333%; }
+}
+
+/* ---- Tables ---- */
+.survey-bs3 .table-light {
+	background-color: rgba(128, 128, 128, 0.15);
+}
+.survey-bs3 .align-middle {
+	vertical-align: middle !important;
+}
+
+/* ---- Typography / misc ---- */
+.survey-bs3 .fw-bold {
+	font-weight: 700 !important;
+}
+.survey-bs3 .text-bg-secondary {
+	background-color: #6c757d;
+	color: #fff;
+	padding: 2px 8px;
+	border-radius: 10px;
+}
+.survey-bs3 .alert-light {
+	background-color: rgba(128, 128, 128, 0.15);
+	border: 1px solid rgba(128, 128, 128, 0.40);
+}
+.survey-bs3 .bg-white {
+	background-color: #fff !important;
+}
+.survey-bs3 .rounded {
+	border-radius: 4px !important;
+}
+.survey-bs3 .border {
+	border: 1px solid rgba(128, 128, 128, 0.40) !important;
+}
+.survey-bs3 .text-secondary {
+	color: #999 !important;
+}

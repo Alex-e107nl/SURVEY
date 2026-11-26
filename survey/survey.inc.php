@@ -537,3 +537,81 @@ function survey_render_fields($fdata)
 	if($currentCol > 0) $ret .= '</div>';
 	return $ret;
 }
+
+/**
+ * Folder name of the currently active theme (e.g. 'bootstrap3').
+ *
+ * The core stores the folder name in e107->site_theme while it resolves
+ * the theme; the THEME constant (path to the theme dir) is the fallback.
+ * NOTE: e_THEME is the themes DIRECTORY, not the current folder.
+ * @return string
+ */
+function survey_current_theme_folder()
+{
+	$e107 = e107::getInstance();
+	if (!empty($e107->site_theme))
+	{
+		return $e107->site_theme;
+	}
+
+	if (defined('THEME'))
+	{
+		$path = str_replace('\\', '/', rtrim(THEME, '/'));
+		return basename($path);
+	}
+
+	return '';
+}
+
+/**
+ * Does the current rendering context use e107's classic Bootstrap 3 theme?
+ *
+ * The plugin UI is built with Bootstrap 5 markup. Under the standard
+ * bootstrap3 theme most BS5 utility/component classes do not exist, so
+ * the plugin then loads survey_bs5_compat.css and wraps its output in a
+ * <div class="survey-bs3"> (see survey_bs3_wrap()).
+ *
+ * - Admin area (e107 2.5+): the admin theme is a core preference
+ *   ('bootstrap3' | 'etabler' | ...).
+ * - Admin area (e107 <= 2.4): no such preference exists and the admin
+ *   area is always the classic bootstrap3 admin theme.
+ * - Front-end: the site theme folder decides (survey_current_theme_folder()).
+ */
+function survey_bs3_theme_active()
+{
+	if (deftrue('e_ADMIN_AREA'))
+	{
+		$adminTheme = e107::getConfig()->get('admintheme');
+		return empty($adminTheme) || $adminTheme === 'bootstrap3';
+	}
+
+	return survey_current_theme_folder() === 'bootstrap3';
+}
+
+/**
+ * Load the Bootstrap 5 compatibility stylesheet for classic BS3 themes.
+ * No-op when the active theme already provides the BS5 classes (e.g. the
+ * tabler/etabler admin theme). Safe to call more than once.
+ */
+function survey_load_bs5_compat()
+{
+	if (survey_bs3_theme_active())
+	{
+		e107::css('survey', 'survey_bs5_compat.css');
+	}
+}
+
+/**
+ * Wrap plugin output so the compat stylesheet applies.
+ * Returns the text unchanged when no compat layer is needed.
+ * @param string $text
+ * @return string
+ */
+function survey_bs3_wrap($text)
+{
+	if (survey_bs3_theme_active())
+	{
+		return '<div class="survey-bs3">' . $text . '</div>';
+	}
+	return $text;
+}

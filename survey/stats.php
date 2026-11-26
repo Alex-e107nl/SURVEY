@@ -2,6 +2,8 @@
 
 require_once(__DIR__.'/../../class2.php');
 require_once(e_HANDLER."userclass_class.php");
+require_once(e_HANDLER."form_handler.php");
+require_once(__DIR__.'/survey.inc.php');
 e107::includeLan(e_PLUGIN.'survey/languages/'.e_LANGUAGE.'/'.e_LANGUAGE.'_front.php');
 
 require_once(HEADERF);
@@ -222,5 +224,5 @@ else
 	$text .= "<br /><div style='text-align:center;'>".LAN_SUR15.".</div>";
 }
 
-$ns -> tablerender("results of survey: ".htmlspecialchars($survey_name), $text);
+$ns -> tablerender("results of survey: ".htmlspecialchars($survey_name), survey_bs3_wrap($text));
 require_once(FOOTERF);

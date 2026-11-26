@@ -21,6 +21,11 @@ require_once(e_HANDLER."form_handler.php");
 require_once(e_HANDLER."userclass_class.php");
 require_once(__DIR__.'/survey.inc.php');
 
+// The plugin UI is built with Bootstrap 5 markup. When the admin area is
+// rendered with e107's classic Bootstrap 3 theme, load the compatibility
+// layer so the builder looks native there as well (see survey.inc.php).
+survey_load_bs5_compat();
+
 $e_sub_cat = 'survey';
 e107::includeLan(e_PLUGIN.'survey/languages/'.e_LANGUAGE.'/'.e_LANGUAGE.'_admin.php');
 
@@ -408,10 +413,6 @@ if($tokenOk && !empty($_POST['update'])){
 	}
 }
 
-// Render messages
-if($mes->hasMessage()){
-	echo "<div class='alert alert-info text-center mb-3'>{$mes->render()}</div>";
-}
 
 // ---- Survey dropdown helper ----
 function survey_existing_dropdown($name, $cur_survey){
@@ -429,7 +430,15 @@ function survey_existing_dropdown($name, $cur_survey){
 }
 
 // ---- Main config UI ----
-$text = "<div class='container-fluid'>";
+// 'survey-bs3' activates the Bootstrap 5 compatibility layer
+// (survey_bs5_compat.css) when the admin area uses the classic BS3 theme.
+$text = "<div class='container-fluid" . (survey_bs3_theme_active() ? " survey-bs3" : "") . "'>";
+
+// Render messages (inside the wrapper so the BS5 spacing classes resolve
+// on classic BS3 themes as well)
+if($mes->hasMessage()){
+	$text = "<div class='alert alert-info text-center mb-3'>{$mes->render()}</div>" . $text;
+}
 
 $isBuilderMode = !empty($_POST['create']) || !empty($_POST['edit']);
 
