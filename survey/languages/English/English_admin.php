@@ -55,7 +55,7 @@ return array(
 	'ADLAN_SUR25' => 'Parameters',
 	'ADLAN_SUR26' => 'To add a new field, enter a label and select a type below, then click Save.',
 	'ADLAN_SUR27' => 'Save',
-	'ADLAN_SUR28' => 'View:',
+	'ADLAN_SUR28' => 'View form',
 	'ADLAN_SUR29' => 'I understand this cannot be undone',
 	'ADLAN_SUR30' => '-none-',
 	'ADLAN_SUR33' => 'Survey Updated',
