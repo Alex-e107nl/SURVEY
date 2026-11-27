@@ -65,6 +65,10 @@
 	color: #337ab7;
 	background-color: transparent;
 	border-color: #337ab7;
+	font-size: 1.2rem !important;
+}
+.survey-field-card .card-header .field-type-badge {
+  font-size: 1.0rem!important;
 }
 .survey-bs3 .btn-outline-primary:hover,
 .survey-bs3 .btn-outline-primary:focus,
