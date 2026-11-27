@@ -4,6 +4,16 @@ A modern, security-hardened survey and form builder plugin for e107 CMS 2.4 — 
 
 ---
 
+## Warning / Disclaimer
+
+Please note! Although we have made every effort and conducted extensive testing, 
+you must ALWAYS create a system backup before applying our code. We are under no 
+circumstances responsible for any damage or data loss resulting from the use of 
+our code. It is impossible to test every possible combination of systems, CMS 
+versions, servers, and PHP versions currently in use.
+
+---
+
 ## Key Features
 
 - **Visual Field Builder** — drag-and-drop interface with 23 field types (text, textarea, checkboxes, radio, dropdown, date, email, number, file upload, signature, color picker, range slider, time picker, country selector, HTML block, password, and more)
